@@ -1,0 +1,45 @@
+{
+  "name": "universal-locale",
+  "version": "0.0.1",
+  "description": "get language locale from browser or system(nodejs)",
+  "repository": "noob9527/universal-locale",
+  "keywords": [
+    "universal",
+    "browser",
+    "system",
+    "os",
+    "locale",
+    "language",
+    "lang"
+  ],
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/index.js.map"
+  ],
+  "main": "dist/index",
+  "typings": "dist/index",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "build": "npm run clean && tsc",
+    "clean": "rm -rf ./dist"
+  },
+  "author": "noob9527",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^22.2.0",
+    "@types/node": "^9.4.7",
+    "coveralls": "^3.0.0",
+    "jest": "^22.4.2",
+    "ts-jest": "^22.4.1",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "browser-locale": "^1.0.3",
+    "os-locale": "^2.1.0"
+  }
+}
