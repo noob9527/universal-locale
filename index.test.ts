@@ -5,7 +5,7 @@ describe('browser', () => {
         Reflect.deleteProperty(global, 'navigator');
     });
     it('should return navigator.language', () => {
-        const expected = 'zh_CN';
+        const expected = 'zh-CN';
         (global as any).navigator = {
             language: expected,
         };
@@ -28,7 +28,7 @@ describe('node', () => {
         expect(getLocale()).toBeUndefined();
     });
     it('should get locale from process.env', () => {
-        const expected = 'zh_CN';
+        const expected = 'foo';
         lcArr.forEach(e => {
             lcArr.forEach(ele => {
                 process.env[ele] = '';
@@ -37,8 +37,10 @@ describe('node', () => {
             expect(getLocale()).toBe(expected);
         });
     });
-    it('should return locale string like language_region', () => {
-        const expected = 'zh_CN';
+    it('should convert unix locale format to language tag', () => {
+        // locale format: [language[_territory][.codeset][@modifier]]
+        // language tag: language-region
+        const expected = 'zh-CN';
         process.env.LC_ALL = 'zh_CN.UTF8';
         expect(getLocale()).toBe(expected);
     });

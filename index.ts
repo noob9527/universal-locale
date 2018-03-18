@@ -17,6 +17,7 @@ function getBrowserLocale(): string | undefined {
 function getOsLocale(): string | undefined {
     const env = process.env;
     const localeStr = env.LC_ALL || env.LC_MESSAGES || env.LANG || env.LANGUAGE;
-    const res = localeStr && localeStr.replace(/[.:].*/, '');
+    const res = localeStr
+        && localeStr.replace(/[.:].*/, '').replace('_', '-');
     return res ? res : undefined;
 }
