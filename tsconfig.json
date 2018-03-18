@@ -1,11 +1,11 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "outDir": "dist",
+        "outDir": "dist/lib",
         "target": "es5",
         "sourceMap": true,
         "declaration": true,
-        "module": "umd",
+        "module": "commonjs",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noImplicitAny": true,

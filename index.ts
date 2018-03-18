@@ -1,4 +1,3 @@
-import * as osLocale from 'os-locale';
 import * as browserLocale from 'browser-locale';
 
 export default function getLocale(): string | undefined {
@@ -15,6 +14,9 @@ function getBrowserLocale(): string | undefined {
     return browserLocale();
 }
 
-function getOsLocale(): string {
-    return osLocale.sync();
+function getOsLocale(): string | undefined {
+    const env = process.env;
+    const localeStr = env.LC_ALL || env.LC_MESSAGES || env.LANG || env.LANGUAGE;
+    const res = localeStr && localeStr.replace(/[.:].*/, '');
+    return res ? res : undefined;
 }

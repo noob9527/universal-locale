@@ -1,5 +1,3 @@
-jest.mock('os-locale');
-import * as osLocale from 'os-locale';
 import getLocale from './index';
 
 describe('browser', () => {
@@ -20,8 +18,28 @@ describe('browser', () => {
 });
 
 describe('node', () => {
-    it('should call os-locale function', () => {
-        getLocale();
-        expect(osLocale.sync.mock.calls.length).toBe(1);
+    const lcArr = ['LC_ALL', 'LC_MESSAGES', 'LANG', 'LANGUAGE'];
+    beforeEach(() => {
+        lcArr.forEach(e => {
+            process.env[e] = '';
+        });
+    });
+    it('should return undefined', () => {
+        expect(getLocale()).toBeUndefined();
+    });
+    it('should get locale from process.env', () => {
+        const expected = 'zh_CN';
+        lcArr.forEach(e => {
+            lcArr.forEach(ele => {
+                process.env[ele] = '';
+            });
+            process.env[e] = expected;
+            expect(getLocale()).toBe(expected);
+        });
+    });
+    it('should return locale string like language_region', () => {
+        const expected = 'zh_CN';
+        process.env.LC_ALL = 'zh_CN.UTF8';
+        expect(getLocale()).toBe(expected);
     });
 });

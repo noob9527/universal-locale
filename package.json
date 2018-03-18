@@ -13,18 +13,20 @@
     "lang"
   ],
   "files": [
-    "dist/index.js",
-    "dist/index.d.ts",
-    "dist/index.js.map"
+    "dist"
   ],
-  "main": "dist/index",
-  "typings": "dist/index",
+  "main": "dist/bundles/universal-locale",
+  "typings": "dist/lib/index",
+  "module": "dist/lib-esm/index",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:ci": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "build": "npm run clean && tsc",
+    "test:ci": "npm run test:coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "build": "npm run clean && run-s build:lib build:lib-esm build:umd",
+    "build:lib": "tsc",
+    "build:lib-esm": "tsc -m es6 --outDir dist/lib-esm",
+    "build:umd": "webpack",
     "clean": "rm -rf ./dist"
   },
   "author": "noob9527",
@@ -32,14 +34,18 @@
   "devDependencies": {
     "@types/jest": "^22.2.0",
     "@types/node": "^9.4.7",
+    "awesome-typescript-loader": "^4.0.1",
     "coveralls": "^3.0.0",
     "jest": "^22.4.2",
+    "npm-run-all": "^4.1.2",
     "ts-jest": "^22.4.1",
     "tslint": "^5.9.1",
-    "typescript": "^2.7.2"
+    "typescript": "^2.7.2",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   },
   "dependencies": {
-    "browser-locale": "^1.0.3",
-    "os-locale": "^2.1.0"
+    "browser-locale": "^1.0.3"
   }
 }
