@@ -1,6 +1,6 @@
 {
   "name": "universal-locale",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "get locale(language tag) from browser or system(nodejs)",
   "repository": "noob9527/universal-locale",
   "keywords": [
